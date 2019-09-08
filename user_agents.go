@@ -10,7 +10,7 @@ import (
 type RotatedUserAgent struct {
 	UserAgents []string
 	mu         *sync.RWMutex
-	index      int
+	index      uint
 }
 
 // Shuffle in place useragent shuffle
@@ -26,7 +26,7 @@ func (r *RotatedUserAgent) Shuffle() {
 // GetUA returns a UA
 func (r *RotatedUserAgent) GetUA() string {
 	r.mu.RLock()
-	ua := r.UserAgents[r.index%len(r.UserAgents)]
+	ua := r.UserAgents[r.index%uint(len(r.UserAgents))]
 	r.mu.RUnlock()
 
 	r.mu.Lock()
