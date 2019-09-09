@@ -49,68 +49,44 @@ func main() {
 }
 
 func reviewGreaterThan(e parser.Entry, n int) func(parser.Entry) bool {
+	i, err := strconv.Atoi(e.ImRating.String())
+	if err != nil {
+		return func(e parser.Entry) bool { return false }
+	}
 	switch n {
 	case 0:
-		return func(e parser.Entry) bool {
-			i, err := strconv.Atoi(e.ImRating.String())
-			if err != nil {
-				return false
-			}
-			if i > 0 {
-				return true
-			}
-
-			return false
-		}
+		// return everything
+		return func(e parser.Entry) bool { return false }
 	case 1:
 		return func(e parser.Entry) bool {
-			i, err := strconv.Atoi(e.ImRating.String())
-			if err != nil {
-				return false
-			}
 			if i > 1 {
 				return true
 			}
-
 			return false
 		}
 	case 2:
 		return func(e parser.Entry) bool {
-			i, err := strconv.Atoi(e.ImRating.String())
-			if err != nil {
-				return false
-			}
 			if i > 2 {
 				return true
 			}
-
 			return false
 		}
 	case 3:
 		return func(e parser.Entry) bool {
-			i, err := strconv.Atoi(e.ImRating.String())
-			if err != nil {
-				return false
-			}
 			if i > 3 {
 				return true
 			}
-
 			return false
 		}
 	case 4:
 		return func(e parser.Entry) bool {
-			i, err := strconv.Atoi(e.ImRating.String())
-			if err != nil {
-				return false
-			}
 			if i > 4 {
 				return true
 			}
-
 			return false
 		}
 	default:
+		// return everything
 		return func(e parser.Entry) bool { return false }
 	}
 }
